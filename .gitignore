@@ -1,0 +1,26 @@
+# SASS #
+.sass-cache/
+*.css.map
+
+# Thumbnails
+._*
+
+# Node #
+node_modules/
+
+# OSX #
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# Editor
+.vscode
