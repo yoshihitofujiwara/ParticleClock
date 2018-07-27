@@ -1,5 +1,5 @@
 # Particle Clock
-<img src="sample.gif" alt>
+<img src="example.gif" alt>
 
 
 ## Command
