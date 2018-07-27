@@ -16,12 +16,12 @@ let now = getNow();
 
 
 export default function () {
-	let renderManeger3D = new RenderManeger3D($('#canvas_container'), {
+	let renderManeger3D = new RenderManeger3D($("#canvas_container"), {
 		isController: true
 	});
 
 	// パーティクルテクスチャ
-	let texture = new THREE.TextureLoader().load("../assets/img/1-10.png");
+	let texture = new THREE.TextureLoader().load("../assets/img/icon.png");
 	texture.minFilter = THREE.LinearFilter;
 	texture.magFilter = THREE.LinearFilter;
 	texture.format = THREE.RGBFormat;
@@ -29,7 +29,7 @@ export default function () {
 	// numberListに数字のパーティクル生成して座標をキャッシュしておく
 	// font loader
 	let loader = new THREE.FontLoader();
-	let typeface = '../assets/fonts/helvetiker_bold.typeface.json?';
+	let typeface = "../assets/fonts/helvetiker_bold.typeface.json?" + performance.now();
 
 	loader.load(typeface, (font) => {
 		for (let i = 0; i < 10; ++i) {

@@ -122,7 +122,7 @@ export default class RenderManeger3D {
 
 
 	/**
-	 * render description
+	 * render
 	 */
 	render() {
 		this.renderer.render(this.scene, this.camera);
