@@ -11,7 +11,7 @@ let numberList = [];
 // 表示時間のパーティクルリスト（文字単位）
 let particleSystemList = [];
 
-	// パーティクル用テクスチャ
+// パーティクル用テクスチャ
 let texture;
 
 // font data
@@ -49,16 +49,15 @@ function init() {
 	loader.load(typeface, (font) => {
 		fontData = font;
 
-
+		// dat.gui
 		renderManeger3D.gui.add(renderManeger3D.gui.params, 'particles', 500, 10000).step(10).onChange((val) => {
 			createParticle();
 		});
-
 		renderManeger3D.gui.add(renderManeger3D.gui.params, 'size', 0.1, 2).onChange((val) => {
 			createParticle();
 		});
 
-
+		// パーティクル生成
 		createParticle();
 
 		// start
@@ -78,7 +77,7 @@ function init() {
 	renderManeger3D.event.on("update", () => {
 		particleSystemList.forEach((psList, i) => {
 			psList.particles.verticesNeedUpdate = true;
-			psList.particleSystem.material.color.setHSL((Math.sin((renderManeger3D.time + (i / 6 * INK.TWO_PI)) * 0.2) + 1) / 2, 0.5, 0.5);
+			psList.particleSystem.material.color.setHSL((Math.sin((renderManeger3D.time + (i / now.length * INK.TWO_PI)) * 0.2) + 1) / 2, 0.5, 0.5);
 		});
 
 		let _now = getNow();
@@ -95,7 +94,7 @@ function init() {
 
 
 /*--------------------------------------------------------------------------
-	utils
+	createParticle
 --------------------------------------------------------------------------*/
 function createParticle(){
 	for (let i = 0; i < 10; ++i) {
@@ -123,7 +122,7 @@ function createParticle(){
 	renderManeger3D.scene.remove.apply(renderManeger3D.scene, renderManeger3D.scene.children);
 
 	// パーティクル追加
-	for (let j = 0; j < 6; ++j) {
+	for (let j = 0; j < now.length; ++j) {
 		let particles = new THREE.Geometry();
 
 		particles.vertices = numberList[+now[j]].particles.clone(numberList[+now[j]].particles).vertices;
@@ -153,6 +152,9 @@ function createParticle(){
 }
 
 
+/*--------------------------------------------------------------------------
+	utils
+--------------------------------------------------------------------------*/
 /**
  * @method morphTo モーフィングアニメーション
  * @param {Number} index 桁数（頭から数えて）
@@ -200,6 +202,6 @@ function zeroPadding(num) {
 /*==========================================================================
 	DOM READY
 ==========================================================================*/
-$(function () {
+$(() => {
 	init();
 });
