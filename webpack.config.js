@@ -10,40 +10,6 @@ console.log(`webpack mode: ${MODE}`);
 // js file path
 const JS = `${__dirname}/src/js/`;
 
-let plugins = [];
-
-/*--------------------------------------------------------------------------
-  options setting
---------------------------------------------------------------------------*/
-// providePlugin
-// plugins.push(
-// 	new webpack.ProvidePlugin({
-// 		$: "jquery",
-// 		INK: "ink-javascript"
-// 	})
-// );
-
-
-// optimization.splitChunks = {
-// 	cacheGroups: {
-// 		// node_modules配下のモジュールをバンドル対象とする
-// 		vendors: {
-// 			test: /node_modules/,
-// 			name: "libs",
-// 			// minSize: 1,
-// 			// minChunks: 2,
-// 			chunks: "initial",
-// 			enforce: true
-// 		},
-// 		// src/js/modules配下のモジュールをバンドル対象とする
-// 		modules: {
-// 			test: /src\/js\/modules/,
-// 			name: "modules",
-// 			chunks: "initial",
-// 			enforce: true
-// 		}
-// 	}
-// };
 
 
 /*--------------------------------------------------------------------------
@@ -54,7 +20,7 @@ module.exports = {
 	mode: MODE,
 
   entry: {
-    scripts: `${JS}/scripts/index.js`
+		scripts: `${JS}/scripts/scripts.js`
   },
 
   output: {
@@ -97,7 +63,5 @@ module.exports = {
         exclude: /node_modules/
       }
     ]
-  },
-
-  plugins: plugins
+  }
 };

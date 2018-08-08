@@ -21,9 +21,10 @@ const PATH = {
 };
 
 // 公開モードフラグ
-const IS_PRODUCTION = !!(
-  process.argv[2] && process.argv[2].indexOf("-pro") != -1
-);
+const IS_PRODUCTION = !!(process.argv[2] && process.argv[2].indexOf("-pro") != -1);
+
+// libs.jsのパッケージ化
+const IS_LIB = !!(process.argv[2] && process.argv[2].indexOf("-lib") != -1);
 
 
 /*--------------------------------------------------------------------------
@@ -93,19 +94,21 @@ $.gulp.task("sass", () => {
 --------------------------------------------------------------------------*/
 $.gulp.task("js", () => {
   // scripts
-  $.gulp
-    .src([
+	$.gulp
+		.src([
 			"!" + PATH.src + "js/libs/",
 			PATH.src + "js/**/*.js"
 		])
-    .pipe($.plugins.plumber())
-    .pipe($.webpackStream($.webpackConfig, $.webpack))
-    .pipe($.gulp.dest(PATH.htdocs + "assets/js/"));
+		.pipe($.plugins.plumber())
+		.pipe($.webpackStream($.webpackConfig, $.webpack))
+		.pipe($.gulp.dest(PATH.htdocs + "assets/js/"));
 
   // libs
-  $.gulp
-    .src([PATH.src + "js/libs/**/*.js"])
-    .pipe($.plugins.plumber())
-    .pipe($.plugins.concat("libs.js"))
-    .pipe($.gulp.dest(PATH.htdocs + "assets/js/"));
+	if (IS_LIB){
+		$.gulp
+			.src([PATH.src + "js/libs/**/*.js"])
+			.pipe($.plugins.plumber())
+			.pipe($.plugins.concat("libs.js"))
+			.pipe($.gulp.dest(PATH.htdocs + "assets/js/"));
+	}
 });

@@ -1,11 +1,11 @@
 # Particle Clock
-<img src="example.gif" alt>
+<img src="example.gif">
 
 
 ## Command
 ```
 $ npm install
-$ gulp
+$ npm run start
 ```
 
 
