@@ -31,12 +31,12 @@ function init() {
 
 
 	// 文字単位のパーティクル量(初期値)
-	renderManeger3D.gui.params.particles = 5000;
+	renderManeger3D.gui.params.particles = 5000 * 6;
 	renderManeger3D.gui.params.size = 1.0;
 
 
 	// 表示する時間のパーティクルを生成
-	texture = new THREE.TextureLoader().load("../assets/img/icon.png");
+	texture = new THREE.TextureLoader().load("./assets/img/icon.png");
 	texture.minFilter = THREE.LinearFilter;
 	texture.magFilter = THREE.LinearFilter;
 	texture.format = THREE.RGBFormat;
@@ -44,13 +44,13 @@ function init() {
 	// 数値のパーティクル座標管理リストの生成
 	// font loader
 	let loader = new THREE.FontLoader();
-	let typeface = "../assets/fonts/helvetiker_bold.typeface.json?" + performance.now();
+	let typeface = "./assets/fonts/helvetiker_bold.typeface.json?" + performance.now();
 
 	loader.load(typeface, (font) => {
 		fontData = font;
 
 		// dat.gui
-		renderManeger3D.gui.add(renderManeger3D.gui.params, 'particles', 500, 10000).step(10).onChange((val) => {
+		renderManeger3D.gui.add(renderManeger3D.gui.params, 'particles', 500, 100000).step(10).onChange((val) => {
 			createParticle();
 		});
 		renderManeger3D.gui.add(renderManeger3D.gui.params, 'size', 0.1, 2).onChange((val) => {
@@ -115,7 +115,7 @@ function createParticle(){
 		numberList[i].particles = new THREE.Geometry();
 
 		// TextGeometry内にランダムな頂点を追加
-		numberList[i].particles.vertices = THREE.GeometryUtils.randomPointsInGeometry(numberList[i].geometry, renderManeger3D.gui.params.particles);
+		numberList[i].particles.vertices = THREE.GeometryUtils.randomPointsInGeometry(numberList[i].geometry, renderManeger3D.gui.params.particles / 6);
 	}
 
 	// パーティクル削除
